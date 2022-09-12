@@ -33,8 +33,12 @@ jobs:
         with:
           context: ./
           file: ./Dockerfile
-          push: true
-          tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
+          # push: true
+          on:
+            push:
+              tags:
+                - "v*.*.*"
+          tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/python-docker:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
